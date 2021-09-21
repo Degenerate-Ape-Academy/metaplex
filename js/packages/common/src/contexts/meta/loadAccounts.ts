@@ -60,8 +60,6 @@ async function getProgramAccounts(
     args,
   );
 
-  console.log(unsafeRes);
-
   const data = (
     unsafeRes.result as Array<{
       account: AccountInfo<[string, string]>;
@@ -103,7 +101,7 @@ export const loadAccounts = async (connection: Connection, all: boolean) => {
       tempCache.whitelistedCreatorsByCreator,
     );
 
-    if (whitelistedCreators.length > 5) {
+    if (whitelistedCreators.length > 3) {
       console.log(' too many creators, pulling all nfts in one go');
       additionalPromises.push(
         getProgramAccounts(connection, METADATA_PROGRAM_ID).then(
