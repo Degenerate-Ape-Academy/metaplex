@@ -18,7 +18,6 @@ import {
   METADATA_PREFIX,
   decodeMetadata,
   getAuctionExtended,
-  decodeAuction,
 } from '../../actions';
 import { AccountInfo, Connection, PublicKey } from '@solana/web3.js';
 import {
@@ -36,22 +35,22 @@ import { ParsedAccount } from '../accounts/types';
 import { getEmptyMetaState } from './getEmptyMetaState';
 import { getMultipleAccounts } from '../accounts/getMultipleAccounts';
 
-export const USE_SPEED_RUN = false;
-const WHITELISTED_METADATA = ['98vYFjBYS9TguUMWQRPjy2SZuxKuUMcqR4vnQiLjZbte'];
-const WHITELISTED_AUCTION = ['D8wMB5iLZnsV7XQjpwqXaDynUtFuDs7cRXvEGNj1NF1e'];
+export const USE_SPEED_RUN = true;
+const WHITELISTED_METADATA = ['5gsVKEQeWih1Sr6YYMNpWPcsRVxD3Kvu3z4CYe9RBpZ9'];
+const WHITELISTED_AUCTION = ['5UfK4BxbZ4uzZu8A4nZ9z5EgtDPDnxizVSTQQZ1b63Bs'];
 const AUCTION_TO_METADATA: Record<string, string[]> = {
-  D8wMB5iLZnsV7XQjpwqXaDynUtFuDs7cRXvEGNj1NF1e: [
-    '98vYFjBYS9TguUMWQRPjy2SZuxKuUMcqR4vnQiLjZbte',
+  '5UfK4BxbZ4uzZu8A4nZ9z5EgtDPDnxizVSTQQZ1b63Bs': [
+    '5gsVKEQeWih1Sr6YYMNpWPcsRVxD3Kvu3z4CYe9RBpZ9',
   ],
 };
 const AUCTION_TO_VAULT: Record<string, string> = {
-  D8wMB5iLZnsV7XQjpwqXaDynUtFuDs7cRXvEGNj1NF1e:
-    '3wHCBd3fYRPWjd5GqzrXanLJUKRyU3nECKbTPKfVwcFX',
+  '5UfK4BxbZ4uzZu8A4nZ9z5EgtDPDnxizVSTQQZ1b63Bs':
+    '3NbVwriJuRt3omjr6xoJNxFykJjvKgZfbEGhZ8M5pLbT',
 };
 const WHITELISTED_AUCTION_MANAGER = [
-  '3HD2C8oCL8dpqbXo8hq3CMw6tRSZDZJGajLxnrZ3ZkYx',
+  'Gd3AZMwarjnY6JgWPkhybJAsVy6rAQUetRXBXXpC6mHf',
 ];
-const WHITELISTED_VAULT = ['3wHCBd3fYRPWjd5GqzrXanLJUKRyU3nECKbTPKfVwcFX'];
+const WHITELISTED_VAULT = ['3NbVwriJuRt3omjr6xoJNxFykJjvKgZfbEGhZ8M5pLbT'];
 
 async function getProgramAccounts(
   connection: Connection,

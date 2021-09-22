@@ -134,22 +134,6 @@ export const AuctionView = () => {
               {items}
             </Carousel>
           </div>
-          <h6>Number Of Winners</h6>
-          <h1>
-            {winnerCount === undefined ? (
-              <Skeleton paragraph={{ rows: 0 }} />
-            ) : (
-              winnerCount
-            )}
-          </h1>
-          <h6>Number Of NFTs</h6>
-          <h1>
-            {nftCount === undefined ? (
-              <Skeleton paragraph={{ rows: 0 }} />
-            ) : (
-              nftCount
-            )}
-          </h1>
           <h6>About this {nftCount === 1 ? 'NFT' : 'Collection'}</h6>
           <div className="auction-paragraph">
             {hasDescription && <Skeleton paragraph={{ rows: 3 }} />}
@@ -167,7 +151,12 @@ export const AuctionView = () => {
               <List grid={{ column: 4 }}>
                 {attributes.map(attribute => (
                   <List.Item>
-                    <Card title={attribute.trait_type}>{attribute.value}</Card>
+                    <Card 
+                      title={attribute.trait_type}
+                      headStyle={{color: '#d1c7f1'}}
+                    >
+                      {attribute.value}
+                    </Card>
                   </List.Item>
                 ))}
               </List>
@@ -186,18 +175,6 @@ export const AuctionView = () => {
             {art.title || <Skeleton paragraph={{ rows: 0 }} />}
           </h2>
           <Row gutter={[50, 0]} style={{ marginRight: 'unset' }}>
-            <Col>
-              <h6>Edition</h6>
-              {!auction && (
-                <Skeleton title={{ width: '100%' }} paragraph={{ rows: 0 }} />
-              )}
-              {auction && (
-                <p className="auction-art-edition">
-                  {(auction?.items.length || 0) > 1 ? 'Multiple' : edition}
-                </p>
-              )}
-            </Col>
-
             <Col>
               <h6>View on</h6>
               <div style={{ display: 'flex' }}>

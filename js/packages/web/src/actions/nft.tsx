@@ -65,7 +65,7 @@ export const mintNFT = async (
 
   const metadataContent = {
     name: metadata.name,
-    symbol: metadata.symbol,
+    symbol: "DAPE",
     description: metadata.description,
     seller_fee_basis_points: metadata.sellerFeeBasisPoints,
     image: metadata.image,
@@ -142,7 +142,7 @@ export const mintNFT = async (
 
   const metadataAccount = await createMetadata(
     new Data({
-      symbol: metadata.symbol,
+      symbol: "DAPE",
       name: metadata.name,
       uri: ' '.repeat(64), // size of url for arweave
       sellerFeeBasisPoints: metadata.sellerFeeBasisPoints,
@@ -223,7 +223,7 @@ export const mintNFT = async (
     await updateMetadata(
       new Data({
         name: metadata.name,
-        symbol: metadata.symbol,
+        symbol: "DAPE",
         uri: arweaveLink,
         creators: metadata.creators,
         sellerFeeBasisPoints: metadata.sellerFeeBasisPoints,

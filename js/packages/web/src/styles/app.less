@@ -6,6 +6,27 @@ html {
   width: 100vw;
   overflow-x: hidden;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #132359;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d1c7f1;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ebe24e;
+}
+
 #root {
   height: 100%;
   font-family: 'Graphik Web', sans-serif;
@@ -32,6 +53,8 @@ body {
   font-family: 'Graphik Web' !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background: #020513;
 }
 
 .no-events {
