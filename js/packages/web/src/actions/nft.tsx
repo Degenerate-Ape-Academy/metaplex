@@ -195,6 +195,7 @@ export const mintNFT = async (
   data.append('tags', JSON.stringify(tags));
   data.append('transaction', txid);
   realFiles.map(f => data.append('file[]', f));
+  
 
   // TODO: convert to absolute file name for image
 
