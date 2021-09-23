@@ -7,6 +7,7 @@ import {
   fromLamports,
   CountdownState,
   PriceFloorType,
+  BidState,
 } from '@oyster/common';
 import { AuctionView, AuctionViewState, useBidsForAuction } from '../../hooks';
 import { AmountLabel } from '../AmountLabel';
@@ -49,6 +50,11 @@ export const AuctionNumbers = (props: { auctionView: AuctionView }) => {
 
   return (
     <div style={{ minWidth: 350 }}>
+      {isStarted && bids.length > 0 && (
+        <Row style={{ paddingTop: '10px' }}>
+          The tick size for this auction is 0.420 (bids must be placed in increments of 0.420 SOL). Your bid will automatically round to the nearest increment.
+        </Row>
+      )}
       <Row>
         {!ended && (
           <Col span={12}>

@@ -195,7 +195,6 @@ export const AuctionCard = ({
   const { prizeTrackingTickets, bidRedemptions } = useMeta();
   const bids = useBidsForAuction(auctionView.auction.pubkey);
 
-  const [value, setValue] = useState<number>();
   const [loading, setLoading] = useState<boolean>(false);
   const [showBidModal, setShowBidModal] = useState<boolean>(false);
   const [showRedeemedBidModal, setShowRedeemedBidModal] =
@@ -236,12 +235,20 @@ export const AuctionCard = ({
   const gapTick = auctionExtended
     ? auctionExtended.info.gapTickSizePercentage
     : 0;
+
+  const [value, setValue] = useState<number>();
   const tickSize = auctionExtended ? auctionExtended.info.tickSize : 0;
   const tickSizeInvalid = !!(
     tickSize &&
     value &&
     (value * LAMPORTS_PER_SOL) % tickSize.toNumber() != 0
   );
+
+  const blazeItRounding = () => {
+    if (value) {
+      setValue(parseFloat((Math.round(value/0.42) * 0.42).toFixed(2)))
+    }
+  }
 
   const gapBidInvalid = useGapTickCheck(value, gapTick, gapTime, auctionView);
 
@@ -492,13 +499,13 @@ export const AuctionCard = ({
                         fontSize: '0.9rem',
                       }}
                     >
-                      Bids placed in the last {gapTime} minutes will extend
-                      bidding for another {gapTime} minutes beyond the point in
+                      Bids placed in the last 4.20 minutes will extend
+                      bidding for another 4.20 minutes beyond the point in
                       time that bid was made.{' '}
                       {gapTick && (
                         <span>
                           Additionally, once the official auction end time has
-                          passed, only bids {gapTick}% larger than an existing
+                          passed, only bids 4.20% larger than an existing
                           bid will be accepted.
                         </span>
                       )}
@@ -508,14 +515,14 @@ export const AuctionCard = ({
                   <AuctionNumbers auctionView={auctionView} />
 
                   <br />
-                  {tickSizeInvalid && tickSize && (
+                  {/* {tickSizeInvalid && tickSize && (
                     <span style={{ color: 'red' }}>
                       Tick size is ◎{tickSize.toNumber() / LAMPORTS_PER_SOL}.
                     </span>
-                  )}
+                  )} */}
                   {gapBidInvalid && (
                     <span style={{ color: 'red' }}>
-                      Your bid needs to be at least {gapTick}% larger than an
+                      Your bid needs to be at least 4.20% larger than an
                       existing bid during gap periods to be eligible.
                     </span>
                   )}
@@ -537,6 +544,7 @@ export const AuctionCard = ({
                         background: '#393939',
                         borderRadius: 16,
                       }}
+                      step={0.42}
                       onChange={setValue}
                       precision={4}
                       formatter={value =>
@@ -544,7 +552,8 @@ export const AuctionCard = ({
                           ? `◎ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                           : ''
                       }
-                      placeholder="Amount in SOL"
+                      placeholder={ (parseFloat(formatTokenAmount(bids[0].info.lastBid, mintInfo)) + 0.42).toString() }
+                      onBlur={blazeItRounding}
                     />
                     <div
                       style={{
