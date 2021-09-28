@@ -116,6 +116,8 @@ export const AppBar = () => {
       <div className="app-left-left">
         <div className="app-logo-container"><img src="/logo.png" width="70" /></div>
         <div className="app-left app-bar-box">
+          {window.location.hash !== '#/analytics' && <Notifications />}
+          <div className="divider" />
           <MetaplexMenu />
         </div>
       </div>
